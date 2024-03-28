@@ -1,13 +1,14 @@
 //
-//  ModuleBetaFactory.swift
+//  ModuleGammaFactory.swift
 //  SimpleMVP
 //
-//  Created by Dmitriy Mirovodin on 18.02.2024.
+//  Created by Sergei Smirnov on 27.03.2024.
+//
 
 import UIKit
 
-/// Фабрика для создания модуля Beta
-final class ModuleBetaFactory {
+/// Фабрика для создания модуля Gamma
+final class ModuleGammaFactory {
     
     // В структуре параметры, которые мы хотим передать в модуль.
     struct Context {
@@ -19,17 +20,15 @@ final class ModuleBetaFactory {
         /// Только Factory может наполнять Presenter реальными сервисами и другими зависимостями
         let dataBaseService = DataBaseService()
         
-        let router = ModuleBetaRouter(
-            factory: ModuleGammaFactory(),
-            alertFactory: AlertModuleFactory()
-        )
-        
-        let presenter = ModuleBetaPresenter(
+        let router = ModuleGammaRouter(alertFactory: AlertModuleFactory())
+
+        let presenter = ModuleGammaPresenter(
             someParam: context.someParam,
             dataBaseService: dataBaseService,
             router: router
         )
-        let vc = ModuleBetaViewController(presenter: presenter)
+        
+        let vc = ModuleGammaViewController(presenter: presenter)
         
         presenter.view = vc
         router.setRootViewController(root: vc)
@@ -37,4 +36,3 @@ final class ModuleBetaFactory {
         return vc
     }
 }
-

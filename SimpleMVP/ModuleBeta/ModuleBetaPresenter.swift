@@ -11,6 +11,8 @@ protocol ModuleBetaPresenterProtocol {
     
     func viewDidLoad()
     func requestSave()
+    func tapButtonToModuleGamma()
+    func showConfirmation()
 }
 
 final class ModuleBetaPresenter: ModuleBetaPresenterProtocol {
@@ -47,6 +49,12 @@ final class ModuleBetaPresenter: ModuleBetaPresenterProtocol {
         view?.update(model: model)
     }
     
+    func showConfirmation() {
+        router.showConfirmation { [weak self] in
+            self?.requestSave()
+        }
+    }
+    
     func requestSave() {
         dataBaseService.storeData(value: someParam) { [weak self] (result: Result<Void, Error>) in
             guard let self else { return }
@@ -58,5 +66,9 @@ final class ModuleBetaPresenter: ModuleBetaPresenterProtocol {
                 router.showError()
             }
         }
+    }
+    
+    func tapButtonToModuleGamma() {
+        router.openModuleGamma(with: "params from module Beta")
     }
 }

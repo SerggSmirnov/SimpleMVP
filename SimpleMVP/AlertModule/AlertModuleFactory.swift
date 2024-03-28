@@ -26,4 +26,33 @@ final class AlertModuleFactory {
         
         return alertViewController
     }
+    
+    func makeDialog(
+        title: String,
+        message: String,
+        completion: @escaping () -> Void
+    ) -> UIViewController {
+        
+        let alertViewController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let actionOk = UIAlertAction(
+            title: "Ok",
+            style: .default
+        ) { _ in completion() }
+        
+        let actionCancel = UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil
+        )
+        
+        alertViewController.addAction(actionCancel)
+        alertViewController.addAction(actionOk)
+        
+        return alertViewController
+    }
 }
