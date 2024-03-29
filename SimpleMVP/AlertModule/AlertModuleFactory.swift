@@ -30,7 +30,7 @@ final class AlertModuleFactory {
     func makeDialog(
         title: String,
         message: String,
-        completion: @escaping () -> Void
+        onConfirm: @escaping () -> Void
     ) -> UIViewController {
         
         let alertViewController = UIAlertController(
@@ -42,7 +42,7 @@ final class AlertModuleFactory {
         let actionOk = UIAlertAction(
             title: "Ok",
             style: .default
-        ) { _ in completion() }
+        ) { _ in onConfirm() }
         
         let actionCancel = UIAlertAction(
             title: "Cancel",

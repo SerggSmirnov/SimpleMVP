@@ -16,7 +16,7 @@ protocol ModuleBetaRouterProtocol {
     
     func showSuccess()
     func showError()
-    func showConfirmation(completion: @escaping () -> Void)
+    func showConfirmation(onConfirm: @escaping () -> Void)
 }
 
 final class ModuleBetaRouter: ModuleBetaRouterProtocol {
@@ -63,11 +63,11 @@ final class ModuleBetaRouter: ModuleBetaRouterProtocol {
         root?.present(viewController, animated: true)
     }
     
-    func showConfirmation(completion: @escaping () -> Void) {
+    func showConfirmation(onConfirm: @escaping () -> Void) {
         let viewController = alertFactory.makeDialog(
             title: "Module Beta",
             message: "Save changes?"
-        ) { completion() }
+        ) { onConfirm() }
         
         root?.present(viewController, animated: true)
     }

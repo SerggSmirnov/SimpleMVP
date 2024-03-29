@@ -10,7 +10,7 @@ protocol ModuleBetaPresenterProtocol {
     var title: String { get }
     
     func viewDidLoad()
-    func requestSave()
+    func saveData()
     func tapButtonToModuleGamma()
     func showConfirmation()
 }
@@ -51,11 +51,11 @@ final class ModuleBetaPresenter: ModuleBetaPresenterProtocol {
     
     func showConfirmation() {
         router.showConfirmation { [weak self] in
-            self?.requestSave()
+            self?.saveData()
         }
     }
     
-    func requestSave() {
+    func saveData() {
         dataBaseService.storeData(value: someParam) { [weak self] (result: Result<Void, Error>) in
             guard let self else { return }
             
